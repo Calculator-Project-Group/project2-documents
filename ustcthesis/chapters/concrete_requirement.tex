@@ -1,15 +1,15 @@
 \chapter{具体需求}
-<The following sections must be repeated for each requirement. >
+%<The following sections must be repeated for each requirement. >
 
-在每一条需求描述中重复下列部分
+%在每一条需求描述中重复下列部分
 \section{功能需求}
-This section describes how the input of the software is translated to the output. It describes the essential action the software must perform.
+%This section describes how the input of the software is translated to the output. It describes the essential action the software must perform.
 
-For each kind of function, or each independent function in some cases, the requirements of input, process and output must be described, which are usually organized with the following four subsections:
+%For each kind of function, or each independent function in some cases, the requirements of input, process and output must be described, which are usually organized with the following four subsections:
 
-本子章节应描述软件产品的输入怎样被转换成输出。它描述了软件必须执行的基本动作。 
+%本子章节应描述软件产品的输入怎样被转换成输出。它描述了软件必须执行的基本动作。 
 
-对每一类功能或有时对每一个单独的功能，必须描述输入、处理、输出方面的需求。这些通常以下面四个子段落来组织：
+%对每一类功能或有时对每一个单独的功能，必须描述输入、处理、输出方面的需求。这些通常以下面四个子段落来组织：
 \subsection{功能需求1}
 Please don't use "Functional Requirement(1)" as the title of the functional requirement. Name the functional requirements with a few simple words and a requirement ID.  For example:
 
@@ -103,6 +103,25 @@ A. 对该功能所有输出数据的详细描述，这个描述包括：
 B. 在适当的地方提供对接口规格或接口控制文档的参考。
 
 此外，对那些需求集中在输入/输出行为的系统，SRS应描述所有重要的输入/输出行为及输入输出对的次序。对一个需要记忆其行为以根据输入和过去的行为进行反应的系统，输入输出对的次序是要求的；这种功能行为就类似于有限状态机。
+
+\subsection{R.INSTANT.MESSAGE.001 注册}
+\subsubsection{介绍}
+账号注册，用户使用邮箱和密码新建账号
+\subsubsection{输入}
+邮箱
+密码
+确认密码：确保和密码一致
+\subsubsection{处理}
+检查邮箱是否合法
+检查邮箱是否已被注册
+检查密码是否和确认密码一致
+检查密码强度是否合理
+若检查未通过，则中断并返回相应提示信息
+将新用户记录插入数据库
+\subsubsection{输出}
+在用户界面提示注册成功或失败
+
+
 \section{性能需求}
 <If there are performance requirements, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specifies the timing relationships for real time systems. Such requirements should be made as specific as possible. >
 
