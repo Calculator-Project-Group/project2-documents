@@ -106,21 +106,51 @@ B. 在适当的地方提供对接口规格或接口控制文档的参考。
 
 \subsection{R.INSTANT.MESSAGE.001 注册}
 \subsubsection{介绍}
+
 账号注册，用户使用邮箱和密码新建账号
+
 \subsubsection{输入}
-邮箱
-密码
-确认密码：确保和密码一致
+
+\begin{itemize}
+	\item 邮箱
+	\item 密码
+	\item 确认密码：确保和密码一致
+	\end{itemize}
 \subsubsection{处理}
-检查邮箱是否合法
-检查邮箱是否已被注册
-检查密码是否和确认密码一致
-检查密码强度是否合理
+
+\begin{enumerate}
+	\item 检查邮箱是否合法
+	\item 检查邮箱是否已被注册
+	\item 检查密码是否和确认密码一致
+	\item 检查密码强度是否合理
+	\item 将新用户记录插入数据库
+	\end{enumerate}
 若检查未通过，则中断并返回相应提示信息
-将新用户记录插入数据库
+
 \subsubsection{输出}
+
 在用户界面提示注册成功或失败
 
+\subsection{R.INSTANT.MESSAGE.002 文本聊天}
+\subsubsection{介绍}
+
+发送文本给指定用户
+
+\subsubsection{输入}
+
+文本消息
+
+\subsubsection{处理}
+
+\begin{enumerate}
+	\item 检查文本长度
+	\item 发送给指定用户
+
+	\end{enumerate}
+
+\subsubsection{输出}
+
+在聊天界面显示消息
 
 \section{性能需求}
 <If there are performance requirements, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specifies the timing relationships for real time systems. Such requirements should be made as specific as possible. >
