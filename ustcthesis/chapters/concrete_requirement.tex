@@ -116,7 +116,12 @@
 	\item 密码：由数字字母组成，至少为8位
 	\item 确认密码：确保和密码一致
 	\item （可选）用户资料：头像，性别，出生日期，所在地
-	\item （可选）权限配置信息：用户资料中的每个条目对自己好友是否可见、对陌生人是否可见
+	\item （可选）权限配置信息：
+		\begin{enumerate}	
+		\item 用户资料中的每个条目对自己好友是否可见
+		\item 用户资料中的每个条目对陌生人是否可见
+		\item 能否通过地理位置信息搜索到自己
+		\end{enumerate}
 	\end{itemize}
 \subsubsection{处理}
 
@@ -164,6 +169,18 @@
 \subsubsection{输出}
 在用户界面显示相应的用户资料，或提示未找到该用户。
 
+\subsection{R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户}
+\subsubsection{介绍}
+通过GPS或基站信号记录每位用户的大致或精确的位置，由服务器完成分析，并向每位用户推送距离该用户较近的50个用户的用户资料。
+\subsubsection{输入}
+\begin{itemize}
+	\item 用户ID
+	\item 用户的位置信息（由客户端通过系统API获取）
+\end{itemize}
+\subsubsection{处理}
+服务器端采用聚类算法，将处于相近地理位置的用户聚集至相同的一组，并将该组用户推送给组内的每一个用户。
+\subsubsection{输出}
+在每个用户的推送中显示与其距离相近的用户列表，及其用户资料。
 \subsection{R.INSTANT.MESSAGE.CHAT.001 文本聊天}
 \subsubsection{介绍}
 
