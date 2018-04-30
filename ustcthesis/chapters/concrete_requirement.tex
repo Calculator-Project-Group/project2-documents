@@ -205,26 +205,45 @@
 \end{itemize}
 
 
-\subsection{R.INSTANT.MESSAGE.CHAT.001 文本聊天}
+\subsection{R.INSTANT.MESSAGE.CHAT.001 发送文本消息}
 \subsubsection{介绍}
 
 发送文本给指定用户
 
 \subsubsection{输入}
-
-文本消息
+\begin{itemize}
+	\item 文本消息
+	\item 目标用户ID
+\end{itemize}
 
 \subsubsection{处理}
 
 \begin{enumerate}
-	\item 检查文本长度
-	\item 发送给指定用户
+	\item 检查文本长度是否超出限制，如果超出限制，则本次操作失败。
+	\item 将消息发送给指定用户
 
 	\end{enumerate}
 
 \subsubsection{输出}
 
-在聊天界面显示消息
+\begin{itemize}
+	\item 若发送成功，在聊天界面显示消息。
+	\item 若发送失败，仍在聊天界面显示消息，外加发送失败的标志和文本解释。
+	\end{itemize}
+	
+\subsection{R.INSTANT.MESSAGE.CHAT.002 发送语音消息}
+\subsubsection{介绍}
+用户可使用设备自带的录音功能录制一段语音消息，并立即发送至对方用户。
+\subsection{输入}
+
+\subsection{R.INSTANT.MESSAGE.CHAT.003 创建聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.004 邀请用户加入聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.005 退出聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.006 解散聊天群组}
+
+\subsection{R.INSTANT.MESSAGE.CHAT.007 视频聊天}
+
+
 
 \section{性能需求}
 % <If there are performance requirements, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specifies the timing relationships for real time systems. Such requirements should be made as specific as possible. >
