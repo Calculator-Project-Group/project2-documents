@@ -156,7 +156,7 @@
 % <If there are performance requirements, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specifies the timing relationships for real time systems. Such requirements should be made as specific as possible. >
 
 % 如果有性能方面的需求，在这里列出并解释他们的原理。以帮助开发者理解意图以做出正确的设计选择。在实时系统中的时序关系。保证需求尽可能的详细而精确。
-\subsection{实时性需求}
+% \subsection{性能需求1}
 % Describes the statically and dynamically quantized requirements on the software (or the interaction between user and the software)
 % Static quantized requirement could include:
 % A. Maximum number of terminal supported.
@@ -190,8 +190,9 @@
 % 
 % 注意： 用于一个具体功能的量化限制通常在该功能的处理子章节中描述。
 
-系统应采用推送技术实现聊天消息的实时性。如 android 客户端可以使用 google 或小米等的推送平台，web app可以使用 websocket 长连接。
+\subsection{实时性需求}
 
+系统应采用推送技术实现聊天消息的实时性。如 android 客户端可以使用 google 或小米等的推送平台，web app可以使用 websocket 长连接。
 
 \subsection{并发性需求}
 
@@ -220,7 +221,6 @@
 % 一些组合功能键的用法
 % 
 % B. 与系统用户接口使用相关的所有方面。这可能只是一个简单的关于系统怎样展示给用户而该做什么和不该做什么的列表。例如提供关于长或短错误消息选项。和所有其它需求一样，这些需求也应能被检验，例如，四级打字员经一小时的培训后能在Z分钟内完成功能X，而不是一个打字员能完成功能X。
-
 
 
 \subsection{软件接口}
