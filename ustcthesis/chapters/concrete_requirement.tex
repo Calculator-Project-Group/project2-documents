@@ -104,10 +104,10 @@
 % 
 % 此外，对那些需求集中在输入/输出行为的系统，SRS应描述所有重要的输入/输出行为及输入输出对的次序。对一个需要记忆其行为以根据输入和过去的行为进行反应的系统，输入输出对的次序是要求的；这种功能行为就类似于有限状态机。
 
-\subsection{R.INSTANT.MESSAGE.001 注册}
+\subsection{R.INSTANT.MESSAGE.USERS.001 新用户注册}
 \subsubsection{介绍}
 
-账号注册，用户使用邮箱和密码新建账号
+账号注册，用户使用邮箱和密码新建账号。每位用户在注册时需要提供基本的用户信息（用作用户ID的邮箱，密码），和可选的用户资料（User Profile，如头像，性别，出生日期，所在地等）。
 
 \subsubsection{输入}
 
@@ -115,6 +115,13 @@
 	\item 邮箱：可以接收邮件的合法邮箱
 	\item 密码：由数字字母组成，至少为8位
 	\item 确认密码：确保和密码一致
+	\item （可选）用户资料：头像，性别，出生日期，所在地
+	\item （可选）权限配置信息：
+		\begin{enumerate}	
+		\item 用户资料中的每个条目对自己好友是否可见
+		\item 用户资料中的每个条目对陌生人是否可见
+		\item 能否通过地理位置信息搜索到自己
+		\end{enumerate}
 	\end{itemize}
 \subsubsection{处理}
 
@@ -123,34 +130,120 @@
 	\item 检查邮箱是否已被注册
 	\item 检查密码是否和确认密码一致
 	\item 检查密码强度是否合理
+	\item 若用户上传了头像图片，检查该图片大小符合服务器上传文件大小限制
+	\item 检查用户填写的其他用户资料值是否合法
 	\item 将新用户记录插入数据库
 	\end{enumerate}
-若检查未通过，则中断并返回相应提示信息
+若存在至少一项检查未通过，则本次操作失败；若所有检查均通过，则在数据库用户表中插入一条新记录，并根据输入信息填写字段值。
 
 \subsubsection{输出}
 
-在用户界面提示注册成功或失败
+在用户界面提示注册成功或失败。对于失败的操作需要提示出错原因（如数据项不合法、网络异常）。
 
-\subsection{R.INSTANT.MESSAGE.002 文本聊天}
+\subsection{R.INSTANT.MESSAGE.USERS.002 变更自己的用户资料(User Profile)}
+\subsubsection{介绍}
+应允许用户在创建自己的帐号后，再次修改自己的用户资料。
+（用户ID由于会被多个数据库表所引用，修改开销较大，故修改用户ID未列入需求。）
+
+\subsubsection{输入}
+\begin{itemize}
+	\item 要修改的用户资料
+	\item （可选）权限配置信息：用户资料中的每个条目对自己好友是否可见、对陌生人是否可见
+	\item 当前用户所对应的ID(由客户端程序获得，无需用户输入)
+	\end{itemize}
+\subsubsection{处理}
+检查修改后的用户资料是否合法，与R.INSTANT.MESSAGE.USERS.001中的检查步骤相同。
+若存在至少一项检查未通过，则本次操作失败；若所有检查均通过，则在数据库用户表中修改已存在的记录，并根据输入信息填写字段值。
+\subsubsection{输出}
+在用户界面提示修改成功或失败。对于失败的操作需要提示出错原因（如数据项不合法、网络异常）。
+
+\subsection{R.INSTANT.MESSAGE.USERS.003 使用用户ID来查找用户资料(User Profile)}
+\subsubsection{介绍}
+用户可通过搜索另一用户的ID来访问另一个用户所公开的基本资料。
+\subsubsection{输入}
+\begin{itemize}
+	\item 要查询的用户ID
+	\end{itemize}
+\subsubsection{处理}
+在数据库内执行查询语句，若查找到相应用户，则返回该用户设置为公开访问权限的用户资料项；若未查找到，本次操作失败。
+\subsubsection{输出}
+若操作成功，在用户界面显示相应的用户资料；若操作失败，返回相应的出错原因（如用户不存在、网络异常）。
+
+\subsection{R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户}
+\subsubsection{介绍}
+通过GPS或基站信号记录每位用户的大致或精确的位置，由服务器完成分析，并向每位用户推送距离该用户较近的50个用户的用户资料。
+\subsubsection{输入（由客户端自动完成）}
+\begin{itemize}
+	\item 用户ID
+	\item 用户的位置信息（由客户端通过系统API获取）
+\end{itemize}
+\subsubsection{处理}
+服务器端采用聚类算法，将处于相近地理位置的用户聚集至相同的一组，并将该组用户推送给组内的每一个用户。
+\subsubsection{输出}
+在每个用户的推送中显示与其距离相近的用户列表，及其用户资料。
+
+\subsection{R.INSTANT.MESSAGE.USERS.005 申请好友}
+\subsubsection{介绍}
+用户均可以通过以上各种搜索和发现用户的方式，向别的用户发出添加好友的请求。合法的申请发出后，对方若同意申请，则双方的联系人列表中均会加入对方的条目。
+\subsubsection{输入}
+\begin{itemize}
+	\item 对方用户ID（当用户通过搜索或别的方式查找到某一用户并申请好友时，此字段由客户端自动获得）
+	\item 一段文本验证消息
+\end{itemize}
+\subsubsection{处理}
+\begin{itemize}
+	\item 当用户发出申请后，此申请会作为一条文本消息发送至对方。文本消息发送时的处理流程见“R.INSTANT.MESSAGE.CHAT.001 文本聊天”。
+	\item 对方接收到该消息后，可选择同意申请或者拒绝申请。若对方忽略该消息足够长时间，系统默认会选择拒绝申请。
+	\item 当对方同意申请后，检测两个用户已有的好友数量。若至少有一个用户的已有好友数量到达允许的最大值，则本次操作失败并返回；
+	若两个用户的已有好友数量均未到达最大值，则在各自的联系人表中加入对方的记录。
+\end{itemize}
+\subsubsection{输出}
+\begin{itemize}
+	\item 当用户发出合法的申请后，在用户界面显示“请求已发送，等待对方审核”的提示消息。
+	\item 当对方对申请给出回复后，在用户界面显示相应的提示。
+	\item 当操作失败时（好友数量过多，或网络原因），在用户界面显示出错原因
+\end{itemize}
+
+
+\subsection{R.INSTANT.MESSAGE.CHAT.001 发送文本消息}
 \subsubsection{介绍}
 
 发送文本给指定用户
 
 \subsubsection{输入}
-
-文本消息
+\begin{itemize}
+	\item 文本消息
+	\item 目标用户ID
+\end{itemize}
 
 \subsubsection{处理}
 
 \begin{enumerate}
-	\item 检查文本长度
-	\item 发送给指定用户
+	\item 检查文本长度是否超出限制，如果超出限制，则本次操作失败。
+	\item 将消息发送给指定用户
 
 	\end{enumerate}
 
 \subsubsection{输出}
 
-在聊天界面显示消息
+\begin{itemize}
+	\item 若发送成功，在聊天界面显示消息。
+	\item 若发送失败，仍在聊天界面显示消息，外加发送失败的标志和文本解释。
+	\end{itemize}
+	
+\subsection{R.INSTANT.MESSAGE.CHAT.002 发送语音消息}
+\subsubsection{介绍}
+用户可使用设备自带的录音功能录制一段语音消息，并立即发送至对方用户。
+\subsection{输入}
+
+\subsection{R.INSTANT.MESSAGE.CHAT.003 创建聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.004 邀请用户加入聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.005 退出聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.006 解散聊天群组}
+
+\subsection{R.INSTANT.MESSAGE.CHAT.007 视频聊天}
+
+
 
 \section{性能需求}
 % <If there are performance requirements, state them here and explain their rationale, to help the developers understand the intent and make suitable design choices. Specifies the timing relationships for real time systems. Such requirements should be made as specific as possible. >

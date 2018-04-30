@@ -1,16 +1,22 @@
 \chapter{其他需求}
-<Any other requirement specified by the customer need to be listed below with appropriate section. This may include Database, Coding requirements, Error handling, Testing requirements etc., Few sample requirements are listed below. Please note, you may remove or add if something is not applicable. >
+% <Any other requirement specified by the customer need to be listed below with appropriate section. This may include Database, Coding requirements, Error handling, Testing requirements etc., Few sample requirements are listed below. Please note, you may remove or add if something is not applicable. >
 
-使用适当的章节，详细说明任何其他客户需求，包括数据库，编码需求，错误处理，测试需求等。下面仅列出了少量样例，你可以删除和增加项目。
-\section{数据库}
-< This could specify the requirements for any database that is to be developed as part of the project. >
+% 使用适当的章节，详细说明任何其他客户需求，包括数据库，编码需求，错误处理，测试需求等。下面仅列出了少量样例，你可以删除和增加项目。
+% \section{数据库}
+% < This could specify the requirements for any database that is to be developed as part of the project. >
 
-详细说明项目相关的数据库方面的需求。
-\section{操作}
-<This could specify the normal and special operations required by the user. >
+% 详细说明项目相关的数据库方面的需求。
+\section{编码需求}
+本项目所包含的所有源代码，包括库文件的源代码，均应保存为无字节顺序标记（Byte-order Mark，BOM）的UTF-8格式。代码注释应尽量用英文撰写，以遍能获得更广大的开源社区的支持。
+% \section{操作}
+% <This could specify the normal and special operations required by the user. >
 
-详细说明用户通常的和特殊的操作需求。
+% 详细说明用户通常的和特殊的操作需求。
+\section{测试需求}
+测试部门应提供考虑全面、细致、充分考虑过边角案例（Corner case）的测试用例，竭力在产品发布之前消除绝大多数潜在的程序bug。
+
 \section{本地化}
-<Any requirement on multi language operation could be described here. >
+为增强本产品的国际化程度和受众，产品界面所显示的语言应可由用户的偏好进行配置。目前需要考虑的语言为中文与英语，但其他语种也应考虑在长远规划之中。
 
-描述支持多语种的需求。
+\section{错误处理}
+对于所有已考虑到的出错情况，无论是用户操作不当造成的（如用户对某一功能的输入不完整、不合法），还是由客观不定因素引起的（如网络不畅通），均需要以友好的方式提示用户。故程序应使用层次化的异常处理机制，以增强稳定性和友好程度。
