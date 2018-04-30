@@ -4,9 +4,13 @@
 % 描述可能限制开发人员选择的事项。
  
 \section{标准符合性}
-< This subsection should specify the requirements derived from existing standards or regulations. In case, if the project refers any International standards, then the deviations from the standards could be specified along with the International standards reference. >
-
-本节详细说明需求所采用的标准或规范的来源。如果项目采用了国际标准，应该说明国际标准及项目与标准的偏离情况。
+下面列出了在各种约束中所提及的国际标准、规范：
+\begin{itemize}
+    \item PEP8标准\\
+    \url{https://www.python.org/dev/peps/pep-0008/}
+    \item OAuth授权标准\\
+    \url{https://oauth.net/2/}
+\end{itemize}
 
 \section{硬件约束}
 % <This subsection could include Requirements for the software to operate inside various hardware constraints, such as timing constraints, memory constraints etc.)
@@ -14,15 +18,15 @@
 % 本节包括软件在不同的硬件平台运行的需求，如时间相关的约束，内存方面的约束等。
 
 对于 x86 桌面平台客户端，
-要求安装包小于 50M，
-安装所需空间小于 200M，
-运行所需内存小于 500M，
+要求安装包小于 30M，
+安装所需空间小于 150M（不包括数据文件），
+运行所需内存小于 200M，
 保证低配置电脑也能正常运行。
 
-对于移动 android 平台客户端，
-要求安装包小于 50M，
-安装所需空间小于 200M，
-运行所需内存小于 500M，
+对于移动 Android 平台客户端，
+要求安装包小于 20M，
+安装所需空间小于 150M，
+运行所需内存小于 300M（Android平台的应用相对x86平台，会占用更多的内存），
 保证低配置手机也能正常运行。
 
 对于 x86 平台服务端，
@@ -44,3 +48,15 @@
 % 本节包括对使用特定技术的限制，包括接口，数据库，并行操作，通讯协议，设计约定，编程规范等。
 
 数据库和第三方组件应尽可能选用开源产品，便于定制修改。
+
+\begin{itemize}
+    \item \textbf{数据库}\\
+    考虑到服务的用户数量较为小众，以及本产品的开源、非营利性政策，选用免费的MySQL作为数据库。
+    \item \textbf{服务端开发框架}\\
+    考虑到开发周期较短，Web应用需求变化较大等因素，我们选用适合快速开发的Django Framework作为服务端的开发框架。
+    \item \textbf{并行计算框架}\\
+    对于程序中可能需要并行处理的部分，我们采用广泛使用的MPI并行框架来编写代码。
+    \item \textbf{编码规范}\\
+    开发过程中，应严格遵守Python代码所推荐遵循的PEP8规范。
+
+\end{itemize}
