@@ -1,7 +1,7 @@
 \chapter{总体设计约束}
-<Describe any items or issues that will limit the options available to the developers. >
+% <Describe any items or issues that will limit the options available to the developers. >
 
-描述可能限制开发人员选择的事项。
+% 描述可能限制开发人员选择的事项。
  
 \section{标准符合性}
 < This subsection should specify the requirements derived from existing standards or regulations. In case, if the project refers any International standards, then the deviations from the standards could be specified along with the International standards reference. >
@@ -13,9 +13,16 @@
 
 本节包括软件在不同的硬件平台运行的需求，如时间相关的约束，内存方面的约束等。
 
+
 \section{技术限制}
 <This subsection could include limitations on the use of specific technologies, interfaces, databases, parallel operations; communications protocols; design conventions or programming standards. >
 
 本节包括对使用特定技术的限制，包括接口，数据库，并行操作，通讯协议，设计约定，编程规范等。
 
-%数据库使用开源产品
+\begin{itemize}
+    \item 服务器使用的数据库应使用开源产品
+    \item linux 平台客户端要支持 ubuntu，debian，centos，arch 等主流发行版
+    \item windows 平台客户端需支持 win7 及更高
+    \item android 平台客户端需支持到安卓 4.4 及以上
+    \item web app 需支持 chrome，firefox 等主流浏览器，IE需支持11及更高
+    \end{itemize}
