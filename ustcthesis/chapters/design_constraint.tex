@@ -9,9 +9,25 @@
 本节详细说明需求所采用的标准或规范的来源。如果项目采用了国际标准，应该说明国际标准及项目与标准的偏离情况。
 
 \section{硬件约束}
-<This subsection could include Requirements for the software to operate inside various hardware constraints, such as timing constraints, memory constraints etc.)
+% <This subsection could include Requirements for the software to operate inside various hardware constraints, such as timing constraints, memory constraints etc.)
 
-本节包括软件在不同的硬件平台运行的需求，如时间相关的约束，内存方面的约束等。
+% 本节包括软件在不同的硬件平台运行的需求，如时间相关的约束，内存方面的约束等。
+
+对于 x86 桌面平台客户端，
+要求安装包小于 50M，
+安装所需空间小于 200M，
+运行所需内存小于 500M，
+保证低配置电脑也能正常运行。
+
+对于移动 android 平台客户端，
+要求安装包小于 50M，
+安装所需空间小于 200M，
+运行所需内存小于 500M，
+保证低配置手机也能正常运行。
+
+对于 x86 平台服务端，
+要求安装所需空间小于 500M，
+运行所需内存小于 1G。
 
 \section{兼容性约束}
 为使产品能够在主流的硬件/软件平台上正确地运行，产品需要满足以下约束要求：
