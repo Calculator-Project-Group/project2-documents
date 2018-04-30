@@ -112,7 +112,7 @@
 \subsubsection{输入}
 \begin{itemize}
 	\item 邮箱：可以接收邮件的合法邮箱
-	\item 密码：由数字字母组成，至少为8位
+	\item 密码：由数字字母和特殊字符组成，三者均须出现，且至少为8位
 	\item 确认密码：确保和密码一致
 	\item （可选）用户资料：头像，性别，出生日期，所在地
 	\item （可选）权限配置信息：
@@ -204,7 +204,7 @@
 \begin{itemize}
 	\item 当用户发出合法的申请后，在用户界面显示“请求已发送，等待对方审核”的提示消息。
 	\item 当对方对申请给出回复后，在用户界面显示相应的提示。
-	\item 当操作失败时（好友数量过多，或网络原因），在用户界面显示出错原因
+	\item 当操作失败时（好友数量过多，或网络原因），在用户界面显示出错原因。
 \end{itemize}
 
 
@@ -256,14 +256,70 @@
 \subsection{R.INSTANT.MESSAGE.CHAT.004 创建聊天群组}
 \subsubsection{介绍}
 创建一个新的聊天群组
+\subsubsection{输入}
+\begin{itemize}
+	\item 群组名称
+	\item 群组介绍文字
+\end{itemize}
+\subsubsection{处理}
+\begin{enumerate}
+	\item 检查群组名称字符串是否合法
+	\item 检查该用户所创建群的数量是否已达上限
+	\item 检查群组介绍文字是否符合长度要求
+\end{enumerate}
+若检查出错，则本次操作失败。若检查成功，则在数据库中创建相应的群组条目，并返回其唯一的数字ID。
+\subsubsection{输出}
+\begin{itemize}
+	\item 若操作成功，则在用户界面显示新创建的群聊ID
+	\item 若操作失败（名称不合法，群数量上限等原因），在用户界面显示出错原因
+\end{itemize}
 
 \subsection{R.INSTANT.MESSAGE.CHAT.005 邀请用户加入聊天群组}
 \subsubsection{介绍}
-邀请一个用户加入一个聊天群组
+邀请一个用户加入一个聊天群组，被邀请用户须是用户的好友。
+\subsubsection{输入}
+\begin{itemize}
+	\item 被邀请的用户ID
+	\item 群组ID（由客户端获取，用户无需输入）
+\end{itemize}
+\subsubsection{处理}
+\begin{enumerate}
+	\item 检测该群组已有的用户数量，若已达到最大值，则本次操作失败并返回。
+	\item 检查用户ID、群组ID有效性后，将邀请消息发送至被邀请的用户。
+	\item 对方接收到该邀请后，可选择同意邀请或者拒绝邀请。若对方忽略该消息足够长时间，系统默认会选择拒绝邀请。
+	\item 将邀请结果回复给原用户。
+\end{enumerate}
+\subsubsection{输出}
+\begin{itemize}
+	\item 当用户发出合法的邀请后，在用户界面显示“请求已发送，等待对方审核”的提示消息。
+	\item 当对方对邀请给出回复后，在用户界面显示相应的提示。
+	\item 当操作失败时（好友数量过多，或网络原因），在用户界面显示出错原因。
+\end{itemize}
 
 \subsection{R.INSTANT.MESSAGE.CHAT.006 退出聊天群组}
+\subsubsection{介绍}
+解除用户与某聊天群组的关系。若该用户为群主，则用户在退出前须指定另一个成员作为新群主。
+\subsubsection{输入}
+群组ID（由客户端获取，用户无需输入）
+\subsubsection{处理}
+\begin{enumerate}
+	\item 检查该用户是否为群主，如果是，则指引完成新群主的分配工作。
+	\item 在数据库中执行相应的删除操作。
+\end{enumerate}
+\subsubsection{输出}
+在用户界面提示操作成功或失败。对于失败的操作需要提示出错原因（如网络异常）。
 \subsection{R.INSTANT.MESSAGE.CHAT.007 解散聊天群组}
-
+\subsubsection{介绍}
+解散一个聊天群主。操作者须为群主。
+\subsubsection{输入}
+群组ID（由客户端获取，用户无需输入）
+\subsubsection{处理}
+\begin{enumerate}
+	\item 检查操作用户是否为群主，若否，本次操作失败。
+	\item 在数据库执行相应的删除操作。
+\end{enumerate}
+\subsubsection{输出}
+在用户界面提示操作成功或失败。对于失败的操作需要提示出错原因（如网络异常，权限不足）。
 \subsection{R.INSTANT.MESSAGE.CHAT.008 视频聊天}
 
 \begin{figure}[h]
