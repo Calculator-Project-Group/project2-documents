@@ -2,3 +2,85 @@
 % <Explain the internal and external dependency for each requirement (if applicable). >
 
 % 解释每一条需求的内部和外部依赖关系。
+\subsection{R.INSTANT.MESSAGE.USERS.001 新用户注册}
+\subsubsection{内部依赖}
+    创建用户资料信息，依赖功能：R.INSTANT.MESSAGE.USERS.002 变更自己的用户资料。
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持。
+
+\subsection{R.INSTANT.MESSAGE.USERS.002 变更自己的用户资料}
+\subsubsection{内部依赖}
+    无其他内部功能依赖
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持。
+
+\subsection{R.INSTANT.MESSAGE.USERS.003 使用用户ID来查找用户资料}
+\subsubsection{内部依赖}
+    无其他内部功能依赖
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持。
+
+\subsection{R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户}
+\subsubsection{内部依赖}
+    无其他内部功能依赖
+\subsubsection{外部依赖}
+\begin{itemize}
+    \item 数据库、服务器、客户端以及网络连接的支持。
+    \item 客户端所在终端的位置信息硬件的支持
+\end{itemize}
+\subsection{R.INSTANT.MESSAGE.USERS.005 申请好友}
+\subsubsection{内部依赖}
+    好友的查找、发现依赖如下两个功能：
+    \begin{itemize}
+        \item R.INSTANT.MESSAGE.USERS.003 使用用户ID来查找用户资料
+        \item R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户
+    \end{itemize}
+\subsubsection{外部依赖}
+数据库、服务器、客户端以及网络连接的支持。
+
+\subsection{R.INSTANT.MESSAGE.CHAT.001 发送文本消息}
+\subsubsection{内部依赖}
+    无其他内部功能依赖
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持。操作系统输入法组件的支持。
+
+	
+\subsection{R.INSTANT.MESSAGE.CHAT.002 发送语音消息}
+\subsubsection{内部依赖}
+    无其他内部功能依赖
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持。终端设备录音硬件的支持。
+
+\subsection{R.INSTANT.MESSAGE.CHAT.002 发送图片消息}
+\subsubsection{内部依赖}
+    客户端应用的图片收藏夹功能的支持。
+\subsubsection{外部依赖}
+    客户端所在终端的文件系统支持。
+    数据库、服务器、客户端以及网络连接的支持
+
+\subsection{R.INSTANT.MESSAGE.CHAT.003 创建聊天群组}
+\subsubsection{内部依赖}
+    无其他内部功能依赖
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持
+
+\subsection{R.INSTANT.MESSAGE.CHAT.005 邀请用户加入聊天群组}
+\subsubsection{内部依赖}
+    R.INSTANT.MESSAGE.CHAT.003 创建聊天群组
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持
+
+\subsection{R.INSTANT.MESSAGE.CHAT.006 退出聊天群组}
+\subsubsection{内部依赖}
+    R.INSTANT.MESSAGE.CHAT.003 创建聊天群组
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持
+
+\subsection{R.INSTANT.MESSAGE.CHAT.007 解散聊天群组}
+\subsubsection{内部依赖}
+\begin{itemize}
+    \item R.INSTANT.MESSAGE.CHAT.003 创建聊天群组
+    \item R.INSTANT.MESSAGE.CHAT.006 退出聊天群组（解除每个用户与群组的关系时，需要用到）
+\end{itemize}
+\subsubsection{外部依赖}
+    数据库、服务器、客户端以及网络连接的支持
