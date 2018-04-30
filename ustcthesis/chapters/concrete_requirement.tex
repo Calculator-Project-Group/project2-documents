@@ -215,51 +215,48 @@
 \subsubsection{输入}
 \begin{itemize}
 	\item 文本消息
-	\item 目标用户ID
+	\item 目标用户ID或群组ID
 \end{itemize}
 
 \subsubsection{处理}
 \begin{enumerate}
 	\item 检查文本长度是否超出限制，如果超出限制，则本次操作失败。
-	\item 将消息发送给指定用户
+	\item 将消息发送给指定用户或群组
 
 	\end{enumerate}
 
 \subsubsection{输出}
 \begin{itemize}
 	\item 若发送成功，在聊天界面显示消息。
-	\item 若发送失败，仍在聊天界面显示消息，外加发送失败的标志和文本解释。
+	\item 若发送失败，仍在聊天界面显示消息，外加发送失败的标志和出错原因，并显示重试操作按钮。
 	\end{itemize}
 	
 
 \subsection{R.INSTANT.MESSAGE.CHAT.002 发送语音消息}
 \subsubsection{介绍}
-用户可使用设备自带的录音功能录制一段语音消息，并立即发送至对方用户。
-
+用户可使用设备自带的录音功能录制一段语音消息，并发送至对方用户或群组。
 \subsubsection{输入}
 用户语音
-
 \subsubsection{处理}
 \begin{enumerate}
 	\item 检查音频大小是否超出限制，如果超出限制，则本次操作失败。
 	\item 将音频文件发送给指定用户
 	\end{enumerate}
-
 \subsubsection{输出}
 \begin{itemize}
 	\item 若发送成功，在聊天界面显示。
 	\item 若发送失败，仍在聊天界面显示，外加发送失败的标志，文本解释以及重新发送按钮。
 	\end{itemize}
+\subsection{R.INSTANT.MESSAGE.CHAT.003 发送图片消息}
+\subsubsection{介绍}
+用户可向对方用户或群组发送包含图片的消息。图片的来源可以是本机、网络或客户端的收藏夹。
 
-\subsection{R.INSTANT.MESSAGE.CHAT.003 创建聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.004 创建聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.005 邀请用户加入聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.006 退出聊天群组}
+\subsection{R.INSTANT.MESSAGE.CHAT.007 解散聊天群组}
 
-\subsection{R.INSTANT.MESSAGE.CHAT.004 邀请用户加入聊天群组}
-
-\subsection{R.INSTANT.MESSAGE.CHAT.005 退出聊天群组}
-
-\subsection{R.INSTANT.MESSAGE.CHAT.006 解散聊天群组}
-
-\subsection{R.INSTANT.MESSAGE.CHAT.007 视频聊天}
+\subsection{R.INSTANT.MESSAGE.CHAT.008 视频聊天}
 
 
 
