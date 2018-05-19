@@ -42,17 +42,85 @@ mysql
     \hline
     email & char & 64 & 用户的注册邮箱 & 唯一 \\
     \hline
-    last\_login & time & 16 & 最近登录时间 & · \\
+    lastlogin & time & 16 & 最近登录时间 & · \\
     \hline
-    register\_time & time & 16 & 注册时间 & · \\
+    registertime & time & 16 & 注册时间 & · \\
     \hline
     birthday & date & 16 & 生日 & · \\
     \hline
     sex & char & 4 & 性别 & · \\
     \hline
+    intro      & char & 512  & 简介 & · \\
+	\hline
 \end{tabular}
 \note{用户数据表Users设计}
 \end{table}
+
+
+\subsubsection{好友数据表设计}
+\begin{table}[htbp]
+\centering
+\caption{好友数据表Friends设计} \label{tab:friend-database}
+\begin{tabular}{|c|c|c|c|c|}
+    \hline
+    字段名 & 类型 & 大小 & 说明 & 备注 \\
+    \hline
+    user1 & char & 64 & 用户1 & 外键，来自用户数据表 \\
+    \hline
+    user2 & char & 64 & 用户2 & 外键，来自用户数据表 \\
+    \hline
+       time & date & 16 & 成为好友的日期 & · \\
+    \hline
+\end{tabular}
+\note{好友数据表Friends设计}
+\end{table}
+
+
+\subsubsection{消息数据表设计}
+\begin{table}[htbp]
+	\centering
+	\caption{消息数据表Messages设计} \label{tab:message-database}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		字段名  & 类型 & 大小 & 说明             & 备注                 \\
+		\hline
+		ID      & char & 64   & 消息的唯一标识符 & 主键                 \\
+		\hline
+		time    & date & 16   & 发送时间         & ·                    \\
+		\hline
+		content & char & 1000 & 消息内容         & ·                    \\
+		\hline
+		from    & char & 64   & 发送者           & 外键，来自用户数据表 \\
+		\hline
+		to      & char & 64   & 接收者           & 外键，来自用户数据表 \\
+		\hline
+	\end{tabular}
+	\note{消息数据表Messages设计}
+\end{table}
+
+
+\subsubsection{群组数据表设计}
+\begin{table}[htbp]
+	\centering
+	\caption{群组数据表Groups设计} \label{tab:group-database}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		字段名     & 类型 & 大小 & 说明             & 备注                 \\
+		\hline
+		ID         & char & 64   & 群组的唯一标识符 & 主键                 \\
+		\hline
+        name       & char & 64   & 群名             & ·                    \\
+        \hline
+		intro      & char & 512  & 简介             & ·                    \\
+		\hline
+		createtime & date & 16   & 创建日期         & ·                    \\
+		\hline
+		user       & char & 64   & 群主             & 外键，来自用户数据表 \\
+		\hline
+	\end{tabular}
+	\note{群组数据表Groups设计}
+\end{table}
+
 
 \subsubsection{订单数据表设计}
 \begin{table}[htbp]
@@ -69,6 +137,9 @@ mysql
 \end{tabular}
 \note{订单数据表Orders设计}
 \end{table}
+
+
+
 \section{安全性设计}
 %备份和容灾设计。
 本产品的服务端主要面向有自己搭建即时通讯服务需求的个人用户和中小企业用户，
