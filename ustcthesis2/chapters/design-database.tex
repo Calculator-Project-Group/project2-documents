@@ -7,14 +7,15 @@
 本系统的数据系统采用MySQL数据库系统。
 
 \section{数据库的命名规则}
-%是否允许单词缩写，允许的单词缩写有哪些。
-允许单词缩写
-identity - ID
-password - pw
+是否允许单词缩写，允许的单词缩写有哪些。
+%允许单词缩写
+%identity - ID
+%password - pw
 
 表名是单数还是复数。关联表如何命名。字符数限制等。
 
-% 字段是否带上前缀（如integer类型则加上i前缀等）。不带
+字段是否带上前缀（如integer类型则加上i前缀等）。
+%不带
 
 \section{逻辑设计}
 %是否需要满足某一种范式。
@@ -50,7 +51,9 @@ mysql
     \hline
     sex & char & 4 & 性别 & · \\
     \hline
-    intro      & char & 512  & 简介 & · \\
+    intro   & char & 512  & 个人说明 & · \\
+    \hline
+    avatar  & char & 512  & 头像url & · \\
 	\hline
 \end{tabular}
 \note{用户数据表Users设计}
@@ -69,7 +72,7 @@ mysql
     \hline
     user2 & char & 64 & 用户2 & 外键，来自用户数据表 \\
     \hline
-       time & date & 16 & 成为好友的日期 & · \\
+    time & date & 16 & 成为好友的日期 & · \\
     \hline
 \end{tabular}
 \note{好友数据表Friends设计}
@@ -122,20 +125,26 @@ mysql
 \end{table}
 
 
-\subsubsection{订单数据表设计}
+\subsubsection{用户群组数据表设计}
 \begin{table}[htbp]
-\centering
-\caption{订单数据表Orders设计} \label{tab:order-database}
-\begin{tabular}{|c|c|c|c|c|}
-    \hline
-    字段名 & 类型 & 大小 & 说明 & 备注 \\
-    \hline
-    ID & char & 64 & 订单的唯一标识符 & 主键\\
-    \hline
-    user & char & 64 & 对应用户 & 外键，来自xx表 \\
-    \hline
-\end{tabular}
-\note{订单数据表Orders设计}
+	\centering
+	\caption{用户群组数据表UserGroup设计} \label{tab:usergroup-database}
+	\begin{tabular}{|c|c|c|c|c|}
+		\hline
+		字段名     & 类型 & 大小 & 说明     & 备注                 \\
+		\hline
+		user       & char & 64   & 群主     & 外键，来自用户数据表 \\
+		\hline
+		user       & char & 64   & 群组     & 外键，来自群组数据表 \\
+		\hline
+		name       & char & 512  & 群名片   & ·                    \\
+        \hline
+        type       & char & 4    & 成员类型 & ·                    \\
+		\hline
+		createtime & date & 16   & 入群日期 & ·                    \\
+		\hline
+	\end{tabular}
+	\note{用户群组数据表UserGroup设计}
 \end{table}
 
 
