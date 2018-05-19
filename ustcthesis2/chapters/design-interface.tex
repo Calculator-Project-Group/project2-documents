@@ -59,14 +59,14 @@
 
         （要求登录）列出符合条件的用户。由搜索功能调用。
 
-        \textbf{请求参数：}
+        \textbf{查询参数：}
         \begin{itemize}
             \item username: 字符串，表示用户名，或要查询的用户名的部分匹配
         \end{itemize}
         \textbf{返回结果：}
         \begin{itemize}
-            \item 200: 操作成功
-            \item 403: 未登录
+            \item 200: 操作成功。
+            \item 403: 未登录。
         \end{itemize}
     \item POST
         
@@ -76,8 +76,8 @@
 
         \textbf{返回结果：}
         \begin{itemize}
-            \item 200: 操作成功，并自动登录
-            \item 404: 当前已有用户登录
+            \item 200: 操作成功，并自动登录。
+            \item 404: 当前已有用户登录。
         \end{itemize}
 
     \item PATCH
@@ -88,8 +88,8 @@
 
         \textbf{返回结果：}
         \begin{itemize}
-            \item 200: 操作成功
-            \item 403: 未登录，或试图修改其他用户的信息
+            \item 200: 操作成功。
+            \item 403: 未登录，或试图修改其他用户的信息。
         \end{itemize}
 
 \end{itemize}
@@ -104,6 +104,53 @@
         password*: String
     }
 \end{lstlisting}
+
+\textbf{返回结果：}
+\begin{itemize}
+    \item 200: 操作成功。
+    \item 404: 当前已有用户登录。
+    \item 403: 认证失败，即密码错误。
+\end{itemize}
+
+\subsubsection{\textbf{GET} /chat/users/logout}
+（要求登录）用户登出。
+\textbf{返回结果：}
+\begin{itemize}
+    \item 200: 操作成功。
+    \item 403: 未登录。
+\end{itemize}
+
+\subsubsection{\textbf{GET} /chat/users/friends}
+（要求登录）获取好友列表。
+
+\textbf{查询参数：}
+\begin{itemize}
+    \item （可选）username: 字符串，表示需要查询的好友的用户名，或其部分匹配。
+    \item （可选）group\_id: 分组id，将queryset限定为group\_id所指定的分组内的好友。
+\end{itemize}
+
+\textbf{返回结果：}
+\begin{itemize}
+    \item 200 - 返回由User数据类型组成的列表。
+    \item 404 - 未找到给定条件的用户。
+    \item 403 - 未登录。
+\end{itemize}
+    
+
+\subsubsection{\textbf{POST} /chat/users/<username>/follow}
+（要求登录）请求添加用户名为username的用户为好友。
+
+\textbf{返回结果：}
+\begin{itemize}
+    \item 200: 请求发送成功。
+    \item 403: 未登录。
+    \item 404: 未找到用户名为username的用户。
+\end{itemize}
+
+\subsubsection{\textbf{POST} /chat/users/<username>/unfollow}
+删除用户名为username的好友。
+
+\textbf{返回结果：}
 
 \subsection{支付宝接口}
 详细讲述不同的接口（查询状态、支付交易、获取回执等）
