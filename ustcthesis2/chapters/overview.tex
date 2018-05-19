@@ -16,11 +16,11 @@
     \hline
     类别 & 标准配置 & 最低配置 \\
     \hline
-    计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.4GHz\\ 内存>=8G\\ 硬盘>=200G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=2G} \\
+    计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.6GHz\\ 内存>=8G\\ 硬盘>=20G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=1G\\ 硬盘>=2G} \\
     \hline
-    计算机软件 & \tabincell{c}{Linux (kernel version>=4.10)\\ GNU gcc (version>=6.3.1)} & \tabincell{c}{Linux (kernel version>=3.10)\\ GNU gcc (version>=5.4)} \\
+    计算机软件 & \tabincell{c}{Windows (version>=10.0.17134.48)\\ Visual Studio 2017} & \tabincell{c}{Windows (version>=6.1.7601)\\ Visual Studio2008} \\
     \hline
-    网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} \\
+    网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈，支持UDP协议} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈，支持UDP协议} \\
     \hline
     其他 & 采用MySQL数据库 & 采用MySQL数据库 \\
     \hline
@@ -36,11 +36,11 @@
     \hline
     类别 & 标准配置 & 最低配置 \\
     \hline
-    计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.4GHz\\ 内存>=8G\\ 硬盘>=200G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=2G} \\
+    计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.0GHz\\ 内存>=4G\\ 硬盘>=10G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=2G} \\
     \hline
-    计算机软件 & \tabincell{c}{Linux (kernel version>=4.10)\\ GNU gcc (version>=6.3.1)} & \tabincell{c}{Linux (kernel version>=3.10)\\ GNU gcc (version>=5.4)} \\
+    计算机软件 & \tabincell{c}{Windows (version>=10.0.17134.48)\\ Visual Studio2017} & \tabincell{c}{Windows（version>=6.1.7601)\\     Visual Studio2008} \\
     \hline
-    网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} \\
+    网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈,支持UDP协议} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈，支持UDP协议} \\
     \hline
     其他 & 采用MySQL数据库 & 采用MySQL数据库 \\
     \hline
@@ -57,11 +57,11 @@
     \hline
     类别 & 标准配置 & 最低配置 \\
     \hline
-    计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.4GHz\\ 内存>=8G\\ 硬盘>=200G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=2G} \\
+    计算机硬件 & \tabincell{c}{基于x86结构的CPU\\ 主频>=2.0GHz\\ 内存>=4G\\ 硬盘>=10G} & \tabincell{c}{基于x86结构的CPU\\ 主频>=1.6GHz\\ 内存>=512M\\ 硬盘>=1G} \\
     \hline
-    计算机软件 & \tabincell{c}{Linux (kernel version>=4.10)\\ GNU gcc (version>=6.3.1)} & \tabincell{c}{Linux (kernel version>=3.10)\\ GNU gcc (version>=5.4)} \\
+    计算机软件 & \tabincell{c}{Windows (version>=10.0.17134.48)\\ Visual Studio2017} & \tabincell{c}{Windows（version>=6.1.7601)\\    Visual Studio2008} \\
     \hline
-    网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可} \\
+    网络通信 & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈，支持UDP协议} & \tabincell{c}{至少要有一块可用网卡\\ 能运行IP协议栈即可，支持UDP协议} \\
     \hline
     其他 & 采用MySQL数据库 & 采用MySQL数据库 \\
     \hline
@@ -72,7 +72,65 @@
 
 \section{需求概述}
 功能需求包括：
+\begin{enumerate}
+\item R.INSTANT.MESSAGE.USERS.001 新用户注册
+\item R.INSTANT.MESSAGE.USERS.002 变更自己的用户资料
+\item R.INSTANT.MESSAGE.USERS.003 使用用户 ID 查找用户资料
+\item R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户
+\item R.INSTANT.MESSAGE.USERS.005 申请好友
+\item R.INSTANT.MESSAGE.CHAT.001 发送文本消息
+\item R.INSTANT.MESSAGE.CHAT.002 发送语音消息
+\item R.INSTANT.MESSAGE.CHAT.003 发送图片消息
+\item R.INSTANT.MESSAGE.CHAT.004 创建聊天群组
+\item R.INSTANT.MESSAGE.CHAT.005 邀请用户加入聊天群组
+\item R.INSTANT.MESSAGE.CHAT.006 退出聊天群组
+\item R.INSTANT.MESSAGE.CHAT.007 解散聊天群组
+\item R.INSTANT.MESSAGE.CHAT.008 视频聊天
+\end{enumerate}
 
 
 \section{条件与限制}
-本节至少要与需求说明文档中相关章节相一致。
+\subsection{硬件要求}
+对于x86桌面平台客户端，要求安装包小于30MB，安装所需空间小于150MB（不包括数据文件），运行所需内存小于 200MB，保证低配置电脑也能正常运行。
+
+对于移动 Android 平台客户端，要求安装包小于 20MB，安装所需空间小于150MB，运行所需内存小于 300MB（Android 平台的应用相对 x86 平台，会占用
+更多的内存），保证低配置手机也能正常运行。
+
+对于 x86 平台服务端，要求安装所需空间小于 500MB，运行所需内存小于1GB。
+
+\subsection{兼容性}
+为使产品能够在主流的硬件/软件平台上正确地运行，产品需要满足以下约束要求：
+\begin{itemize}
+\item Linux 平台下的客户端要支持 Ubuntu，Debian，Centos，Arch 等主流发行版
+\item Windows 平台下的客户端需支持 Windows 7 及更高
+\item Android 平台下的客户端需支持到安卓 4.4 及以上
+\item Web app 需支持 Chrome，Firefox，IE11（或更高版本）等主流浏览器。
+\end{itemize}
+
+\subsection{技术限制}
+数据库和第三方组件应尽可能选用开源产品，便于定制修改。
+
+\begin{itemize}
+\item 数据库
+
+考虑到服务的用户数量较为小众，以及本产品的开源、非营利性政策，选
+用免费的 MySQL 作为数据库。
+\item 服务端开发框架
+
+考虑到开发周期较短，Web 应用需求变化较大等因素，我们选用适合快速
+开发的 Django Framework 作为服务端的开发框架。
+\item 并行计算框架
+
+对于程序中可能需要并行处理的部分，我们采用广泛使用的 MPI 并行框架
+来编写代码。
+\item 编码规范
+
+开发过程中，应严格遵守 Python 代码所推荐遵循的 PEP8 规范。
+\end{itemize}
+
+
+
+
+
+
+
