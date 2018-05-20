@@ -97,10 +97,22 @@
 \end{figure}
 
 \subsection{用户端结构}
-此处应当有一个图和对应的描述。这只是举个例子。可能的内容包括用户端的具体模块、耦合情况等。
+% 此处应当有一个图和对应的描述。这只是举个例子。可能的内容包括用户端的具体模块、耦合情况等。
+
 
 \subsection{服务器端结构}
-此处应当有一个图和对应的描述。这只是举个例子。
+% 此处应当有一个图和对应的描述。这只是举个例子。
+\subsubsection{Django Web应用与Python运行时}
+该模块是本Web系统的主要成分。
+
+\subsubsection{Nginx}
+该模块将作为前端服务器程序，处理所有到达服务器的请求（包括对静态资源的请求）。同时为Django应用提供反向代理。
+
+\subsubsection{HTML/CSS模板和JS脚本}
+为Web客户端界面提供模板、样式和必要的动画。由Nginx模块和Django Web应用读取，生成HTTP应答返回给用户。
+
+\subsubsection{MySQL数据库}
+该模块存储所有的用户、会话及其他数据。数据库会与Django Web应用以\href{https://www.python.org/dev/peps/pep-0249}{PEP 249}所定义的API进行通信。
 
 \subsection{后台数据库维护模块结构}
 此处应当有一个图和对应的描述。这只是举个例子。
