@@ -14,7 +14,16 @@
 此处应当有一个图和对应的描述。
 
 \subsection{客户端基本流程}
-这只是举个例子，如果没有客户端则不需要此节。
+%这只是举个例子，如果没有客户端则不需要此节。
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=13cm]{client_flowchart}
+	\caption{客户端流程图} \label{fig:client_flowchart}
+\end{figure}
+用户在登陆账号后，客户端会从服务器同步好友，群组和会话信息。并打开一个到服务器的长连接，监听服务器的推送消息。
+用户可以点击好友列表或群组列表中的项目启动一个会话窗口，在会话窗口中发送各种消息。
+服务器会及时推送消息给客户端，客户端会将消息及时显示到对应的窗口中。
+客户端也提供好友搜索，个人资料修改等功能。
 
 \subsection{服务器端基本流程}
 这只是举个例子，如果没有服务器端则不需要此节。
@@ -31,9 +40,13 @@
 \subsection{功能2具体流程}
 此处应当有描述。
 
-\subsection{功能3具体流程}
-此处应当有一个描述。
-
+\subsection{用户搜索功能具体流程}
+%此处应当有一个描述。
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=13cm]{search_friend_flowchart}
+	\caption{用户搜索功能流程图} \label{fig:search_friend_flowchart}
+\end{figure}
 
 
 \section{功能结构设计}
