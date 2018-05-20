@@ -162,7 +162,7 @@
 \textbf{请求方法}
 \begin{itemize}
     \item GET
-    获取所有与好友的消息列表。
+    （要求登录）获取所有与好友的消息列表。
 
     \textbf{查询参数：}
     \begin{itemize}
@@ -188,3 +188,27 @@
     }
     \end{lstlisting}
 \end{itemize}
+
+\subsubsection{\textbf{GET} /chat/messages/<message_id>[0-9]+}
+（要求登录）获取消息ID为message\_id的一条消息。
+
+\textbf{返回结果：}
+    \begin{itemize}
+    \item 200: 操作成功完成，并返回由Message数据类型组成的列表。
+    \item 403: 未登录。
+    \end{itemize}
+
+\subsubsection{\textbf{POST} /chat/messages/mark_stream_as_read}
+（要求登录）将指定消息设为已读。在用户在客户端查看这条消息时触发。
+
+\textbf{查询参数：}
+    \begin{itemize}
+        \item msg\_id: Number类型，用来指明消息ID。
+    \end{itemize}
+
+\textbf{返回结果：}
+    \begin{itemize}
+    \item 200: 操作成功完成。
+    \item 403: 未登录。
+    \item 404: 未找到符合条件的消息。
+    \end{itemize}
