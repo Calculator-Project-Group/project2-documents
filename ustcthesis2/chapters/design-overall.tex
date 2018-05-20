@@ -1,17 +1,28 @@
 \chapter{总体设计}
 \section{软件描述}
-系统包括前台和后台两个部分。
+%系统包括前台和后台两个部分。
 
-前台主要功能是：
+%前台主要功能是：
 
-后台主要功能是：
+%后台主要功能是：
+系统包括客户端和服务端两个部分。
+
+客户端为用户提供图形界面，用户可以在客户端上登陆账号，搜索添加好友，和好友聊天，参与群聊，发送语音视频消息。
+
+服务端为客户端提供支持，存储用户数据和消息记录，在不同用户间转发聊天消息，提供搜索功能。
 
 \section{处理流程}
 \subsection{总体流程}
-此处应当有一个图和对应的描述。
+%此处应当有一个图和对应的描述。
 
-\subsection{系统基本流程}
-此处应当有一个图和对应的描述。
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=13cm]{base_flowchart}
+	\caption{总体流程图} \label{fig:base_flowchart}
+\end{figure}
+
+%\subsection{系统基本流程}
+%此处应当有一个图和对应的描述。
 
 \subsection{客户端基本流程}
 %这只是举个例子，如果没有客户端则不需要此节。
@@ -26,7 +37,12 @@
 客户端也提供好友搜索，个人资料修改等功能。
 
 \subsection{服务器端基本流程}
-这只是举个例子，如果没有服务器端则不需要此节。
+%这只是举个例子，如果没有服务器端则不需要此节。
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=13cm]{server_flowchart}
+	\caption{服务端流程图} \label{fig:server_flowchart}
+\end{figure}
 
 \subsection{功能1具体流程}
 举个例子：交易处理流程
