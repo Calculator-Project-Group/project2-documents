@@ -30,8 +30,9 @@
 {
     id!: Number,
     category!: String,
-    message!: String, // 消息内容
-    has_read: Boolean, // 对方是否已读
+    user_id*: Number, //发送方的用户ID
+    message*: String, // 消息内容
+    has_read!: Boolean, // 对方是否已读
     created!: DateTime // 发送时间
 }
 \end{lstlisting}
@@ -131,7 +132,7 @@
 
 \textbf{返回结果：}
 \begin{itemize}
-    \item 200 - 返回由User数据类型组成的列表。
+    \item 200 - 操作成功，并返回由User数据类型组成的列表。
     \item 404 - 未找到给定条件的用户。
     \item 403 - 未登录。
 \end{itemize}
@@ -148,12 +149,42 @@
 \end{itemize}
 
 \subsubsection{\textbf{POST} /chat/users/<username>/unfollow}
-删除用户名为username的好友。
-
+（要求登录）删除用户名为username的好友。
 \textbf{返回结果：}
+\begin{itemize}
+    \item 200: 操作成功完成。
+    \item 403: 未登录。
+    \item 404: 未找到用户名为username的用户。
+\end{itemize}
 
-\subsection{支付宝接口}
-详细讲述不同的接口（查询状态、支付交易、获取回执等）
+\subsection{消息相关}
+\subsubsection{\textbf{API<Message>} /chat/messages}
+\textbf{请求方法}
+\begin{itemize}
+    \item GET
+    获取所有与好友的消息列表。
 
-\section{内部接口}
-内部模块/系统之间的交互的接口。
+    \textbf{查询参数：}
+    \begin{itemize}
+        \item anchor: DateTime类型，用来指明此时间戳以后的消息需要接收。
+    \end{itemize}
+
+    \textbf{返回结果：}
+    \begin{itemize}
+    \item 200: 操作成功完成，并返回由Message数据类型组成的列表。
+    \item 403: 未登录。
+    \end{itemize}
+    \item POST
+    发送一条消息。
+
+    \textbf{输入：}
+    \begin{lstlisting}[language=C]
+    {
+        client_type: String, // 发送方使用的客户端名称
+        sender: Number, // 发送方的用户ID
+        message_type_name: String, // 消息类型
+        content: String, // 消息内容
+        send_to: String // 由逗号分隔的接收人ID列表
+    }
+    \end{lstlisting}
+\end{itemize}
