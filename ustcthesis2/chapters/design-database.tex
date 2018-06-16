@@ -278,3 +278,35 @@
 
 \section{数据库管理与维护说明}
 对于数据库的维护，随时对数据库中的信息加以调试和保存备份。同样需要个工作人员进行系统的分析和用户的反馈，对系统进行升级以及功能的完善。同时保证系统安全有序的运行。
+
+
+{\color{red}
+\section{检索速度}
+对于大用户量造成的数据库性能瓶颈，本系统采用缓存技术和读写分离技术来提高性能，
+在硬件上使用多个数据库专用服务器支持集群设计，使用大内存来支持缓存技术。使用固态硬盘提高性能。
+
+
+\subsection{读写分离}
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=13cm]{Read_Write_Splitting}
+	\caption{读写分离} \label{fig:Read_Write_Splitting}
+\end{figure}
+
+见图-\ref{fig:Read_Write_Splitting}。
+master 提供数据库写服务，slave 提供数据库读服务，两者直接通过 mysql 的 binlog 进行同步。
+可通过横向扩展 slave 线性地增加读性能。
+采用双机热备份。当 master 挂了，和 master 为主从关系的 slave 被停止访问，这时互为主从的slave负责读和写。
+当 master 重新恢复后，slave 同步数据给 master，然后再次恢复最初读写状态。
+
+
+%\subsection{缓存}
+
+
+
+%\section{容量}
+
+%对数据库表进行水平切分，降低单库数据容量，提升数据库写性能
+
+}
