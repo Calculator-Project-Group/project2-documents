@@ -141,13 +141,22 @@
 
 \subsection{R.INSTANT.MESSAGE.USERS.002 变更自己的用户资料(User Profile)}
 \subsubsection{介绍}
-应允许用户在创建自己的帐号后，再次修改自己的用户资料。
-（用户ID由于会被多个数据库表所引用，修改开销较大，故修改用户ID未列入需求。）
+应允许用户在创建自己的帐号后，再次修改自己的用户资料。\\
+{
+	\color{red}
+	为用户的隐私考虑，用户可配置自己用户资料各个字段的访问权限，原则上应包括：
+	\begin{itemize}
+		\item 该项对好友是否可见
+		\item 该项对陌生人是否可见
+	\end{itemize}
+	（用户ID由于会被多个数据库表所引用，修改开销较大，故修改用户ID未列入需求。）
+}
+
 
 \subsubsection{输入}
 \begin{itemize}
 	\item 要修改的用户资料
-	\item （可选）权限配置信息：用户资料中的每个条目对自己好友是否可见、对陌生人是否可见
+	\item （可选）用户资料各字段的权限配置信息
 	\item 当前用户所对应的ID(由客户端程序获得，无需用户输入)
 	\end{itemize}
 
@@ -166,14 +175,15 @@
 	\item 要查询的用户ID
 	\end{itemize}
 \subsubsection{处理}
-在数据库内执行查询语句，若查找到相应用户，则返回该用户设置为公开访问权限的用户资料项；若未查找到，本次操作失败。
+在数据库内执行查询语句，若查找到相应用户，则返回该用户{\color{red}设置为公开访问权限的}用户资料项；若未查找到，本次操作失败。
 \subsubsection{输出}
 若操作成功，在用户界面显示相应的用户资料；若操作失败，返回相应的出错原因（如用户不存在、网络异常）。
 
 
 \subsection{R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户}
 \subsubsection{介绍}
-通过GPS或基站信号记录每位用户的大致或精确的位置，由服务器完成分析，并向每位用户推送距离该用户较近的50个用户的用户资料。
+通过GPS或基站信号记录每位用户的大致或精确的位置，由服务器完成分析，并向每位用户推送距离该用户较近的50个用户的用户资料。\\
+{\color{red}为用户的隐私考虑，用户可选择是否公开自己的位置信息。若用户选择不公开位置信息，该用户将不会被返回至搜索结果。}
 \subsubsection{输入（由客户端自动完成）}
 \begin{itemize}
 	\item 用户ID
@@ -245,7 +255,7 @@
 \subsection{R.INSTANT.MESSAGE.USERS.008 用户主页}
 \subsubsection{介绍}
 每位注册用户均可拥有该用户专属的灵活的、高度自定义的个人主页。\\
-主页本质上为HTML静态网页，用户可从本地上传多个HTML/CSS文档或者JavaScript脚本来定制他们的主页。此外，考虑到广大用户的方便，客户端本身也应提供基本的网页模板和相应的生成、部署工具。
+主页本质上为HTML静态网页，用户可从本地上传多个HTML/CSS文档或者JavaScript脚本来定制他们的主页。此外，考虑到广大用户的方便，客户端本身也应提供基本的网页模板和相应的生成、部署工具。\\
 用户可配置该主页的访问权限，原则上应可选以下选项：
 \begin{itemize}
 	\item 允许Internet用户访问
@@ -255,7 +265,7 @@
 \end{itemize}
 
 
-\subsection{R.INSTANT.MESSAGE.USERS.007 好友清理}
+\subsection{R.INSTANT.MESSAGE.USERS.009 好友清理}
 \subsubsection{介绍}
 客户端可依据各种不同的筛选条件，如最近的聊天时间、聊天频率等，筛选出部分不常联系的好友。用户可在筛选出的列表中实施部分或批量删除。
 \subsubsection{输入}
@@ -268,7 +278,7 @@
 	\item 当操作失败时（好友不存在，或网络原因），在用户界面显示出错原因。
 \end{itemize}
 
-\subsection{R.INSTANT.MESSAGE.USERS.008 设置黑名单}
+\subsection{R.INSTANT.MESSAGE.USERS.0010 设置黑名单}
 \subsubsection{介绍}
 用户可以在客户端将其他用户加入黑名单，黑名单中的用户不能再向自己申请好友，发起临时会话。
 \subsubsection{输入}
@@ -283,7 +293,7 @@
 	\item 当操作失败时（用户不存在，或网络原因），在用户界面显示出错原因。
 \end{itemize}
 
-\subsection{R.INSTANT.MESSAGE.USERS.009 隐私设置}
+\subsection{R.INSTANT.MESSAGE.USERS.0011 隐私设置}
 \subsubsection{介绍}
 用户可以在客户端进行设置，可设置能够通过何种方式添加好友，好友可以查看那些资料，陌生人可以查看那些资料，主页查看权限等
 \subsubsection{输入}
