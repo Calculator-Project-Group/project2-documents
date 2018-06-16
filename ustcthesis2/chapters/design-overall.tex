@@ -89,7 +89,7 @@
 \section{功能结构设计}
 \subsection{整体结构}
 %此处应当有一个图和对应的描述。系统如果像微内核那样，划分成核心模块和若干个子系统，此处应当有图示及说明，然后后续几个节应当描述这几个子系统。如果系统像宏内核，那应当说明有哪些紧密联系的模块，并在后续几个节内描述这些模块。
-
+产品的整体结构如图-\ref{fig:overall_architecture}所示。
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=13cm]{overall_architecture}
@@ -98,24 +98,36 @@
 
 \subsection{用户端结构}
 % 此处应当有一个图和对应的描述。这只是举个例子。可能的内容包括用户端的具体模块、耦合情况等。
-
+% 用户端结构如图-\ref{fig:}
 
 \subsection{服务器端结构}
 % 此处应当有一个图和对应的描述。这只是举个例子。
+服务器端各模块的结构图如图-\ref{fig:backend_architecture}所示。
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=13cm]{backend_arch}
+	\caption{服务器端结构} \label{fig:backend_architecture}
+\end{figure}
 \subsubsection{Django Web应用与Python运行时}
-该模块是本Web系统的主要成分。
+该模块是本Web系统的最重要的成分之一。作为后端，它包含了产品大部分的业务逻辑。
 
-\subsubsection{Nginx}
+Django Web应用内部，还大致分为Request Dispatcher和Views两大模块。Request Dispatcher接收由代理转发来的HTTP请求，根据其地址，将其传入不同的API函数。
+
+包含API内部函数会根据请求，做必要的数据处理和数据库操作，再生成HTTP响应返回给用户。
+
+\subsubsection{Nginx代理}
 该模块将作为前端服务器程序，处理所有到达服务器的请求（包括对静态资源的请求）。同时为Django应用提供反向代理。
 
 \subsubsection{HTML/CSS模板和JS脚本}
-为Web客户端界面提供模板、样式和必要的动画。由Nginx模块和Django Web应用读取，生成HTTP应答返回给用户。
+为Web客户端界面提供模板、样式和必要的动画。由Nginx模块和Django Web应用读取，并生成HTTP应答返回给用户。
 
 \subsubsection{MySQL数据库}
 该模块存储所有的用户、会话及其他数据。数据库会与Django Web应用以\href{https://www.python.org/dev/peps/pep-0249}{PEP 249}所定义的API进行通信。
 
-\subsection{后台数据库维护模块结构}
-此处应当有一个图和对应的描述。这只是举个例子。
+
+
+% \subsection{后台数据库维护模块结构}
+% 此处应当有一个图和对应的描述。这只是举个例子。
 
 
 
