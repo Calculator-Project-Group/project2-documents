@@ -132,24 +132,42 @@ Django Web应用内部，还大致分为Request Dispatcher和Views两大模块�
 
 
 \section{功能需求与程序代码的关系}
-[此处指的是不同的需求分配到哪些模块去实现。可按不同的端拆分此表]
+% [此处指的是不同的需求分配到哪些模块去实现。可按不同的端拆分此表]
 \begin{table}[htbp]
 \centering
 \caption{功能需求与程序代码的关系表} \label{tab:requirement-module}
 \begin{tabular}{|c|c|c|c|}
     \hline
-    · & 模块1 & 模块2 & 模块3 \\
+    需求名称  & 对应模块 \\
     \hline
-    需求1 & · & Y & · \\
+	R.INSTANT.MESSAGE.USERS.001 & · \\
+	新用户注册 & 数据库、Views模块内部的注册子模块 \\
     \hline
-    需求2 & · & Y & · \\
+	R.INSTANT.MESSAGE.USERS.002 & · \\
+	变更自己的用户资料 & 数据库、Views模块内部的用户子模块 \\
     \hline
-    需求3 & · & Y & · \\
+	R.INSTANT.MESSAGE.USERS.003 & · \\
+	查找用户资料 & 数据库、Views模块内部的用户子模块\\
+	\hline
+	R.INSTANT.MESSAGE.USERS.004 & · \\
+	申请好友 & 数据库、Views模块内部的用户子模块 \\
+	\hline
+	R.INSTANT.MESSAGE.CHAT.001/002/003 & · \\
+	发送文本、语音、图片消息 & 数据库、Views模块内部的消息子模块 \\
+	\hline
+	R.INSTANT.MESSAGE.CHAT.008 & · \\
+	视频聊天 & 数据库、Views模块内部的数据流子模块 \\
+	\hline
+	R.INSTANT.MESSAGE.CHAT.004 & · \\
+	创建聊天群组 & 数据库、Views模块内部的群组子模块 \\
     \hline
-    需求4 & Y & · & · \\
-    \hline
-    需求5 & · & · & Y \\
-    \hline
+	R.INSTANT.MESSAGE.CHAT.005 & · \\
+	邀请用户加入聊天群组 & 数据库、Views模块内部的群组子模块 \\
+	\hline
+	R.INSTANT.MESSAGE.CHAT.006/007 & · \\
+	退出、解散聊天群组 & 数据库、Views模块内部的群组子模块 \\
+	\hline
+	\hline
 \end{tabular}
 \note{各项功能需求的实现与各个程序模块的分配关系}
 \end{table}
