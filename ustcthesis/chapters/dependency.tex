@@ -37,6 +37,74 @@
     \end{itemize}
 \subsubsection{外部依赖}
 数据库、服务器、客户端以及网络连接的支持。
+{
+    \color{red}
+    \subsection{R.INSTANT.MESSAGE.USERS.006 好友删除}
+    \subsubsection{内部依赖}
+    \begin{itemize}
+        \item 数据库、服务器、客户端以及网络连接的支持。
+    \end{itemize}
+    \subsection{R.INSTANT.MESSAGE.USERS.007 好友推荐}
+    \subsubsection{介绍}
+    \subsubsection{内部依赖}
+    \begin{itemize}
+        \item R.INSTANT.MESSAGE.USERS.005 申请好友
+        \item R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户
+    \end{itemize}
+    \subsubsection{外部依赖}
+    \begin{itemize}
+        \item 数据库、服务器、客户端以及网络连接的支持。
+        \item 客户端所在终端的位置信息硬件的支持
+    \end{itemize}
+
+    \subsection{R.INSTANT.MESSAGE.USERS.007 用户主页}
+    \subsubsection{内部依赖}
+    无其他内部功能依赖
+    \subsubsection{外部依赖}
+    \begin{itemize}
+        \item 数据库、服务器、客户端以及网络连接的支持。
+    \end{itemize}
+
+    \subsection{R.INSTANT.MESSAGE.USERS.009 好友清理}
+    \subsubsection{内部依赖}
+    \begin{itemize}
+        \item R.INSTANT.MESSAGE.CHAT.001/002/003/004 发送消息
+    \end{itemize}
+    \begin{itemize}
+        \item 数据库、服务器、客户端以及网络连接的支持。
+    \end{itemize}
+    \subsubsection{外部依赖}
+    \begin{itemize}
+        \item 数据库、服务器、客户端以及网络连接的支持。
+    \end{itemize}
+
+    \subsection{R.INSTANT.MESSAGE.USERS.0010 设置黑名单}
+    \subsubsection{内部依赖}
+    \begin{itemize}
+        \item R.INSTANT.MESSAGE.USERS.005 申请好友
+        \item R.INSTANT.MESSAGE.CHAT.001/002/003/004 发送消息
+    \end{itemize}
+    \subsubsection{外部依赖}
+    \begin{itemize}
+        \item 数据库、服务器、客户端以及网络连接的支持。
+    \end{itemize}
+
+    \subsection{R.INSTANT.MESSAGE.USERS.0011 隐私设置}
+    \subsubsection{内部依赖}
+    \begin{itemize}
+        \item R.INSTANT.MESSAGE.USERS.002 变更自己的用户资料
+        \item R.INSTANT.MESSAGE.USERS.003 使用用户ID查找用户资料
+        \item R.INSTANT.MESSAGE.USERS.004 通过地理位置发现周边的用户
+        \item R.INSTANT.MESSAGE.USERS.005 申请好友
+    \end{itemize}
+    \subsubsection{外部依赖}
+    \begin{itemize}
+        \item 数据库、服务器、客户端以及网络连接的支持。
+        \item 客户端所在终端的位置信息硬件的支持
+    \end{itemize}
+    
+}
+
 
 \subsection{R.INSTANT.MESSAGE.CHAT.001 发送文本消息}
 \subsubsection{内部依赖}
