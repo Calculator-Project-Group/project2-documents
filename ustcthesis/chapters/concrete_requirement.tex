@@ -211,10 +211,50 @@
 \color{red}
 \subsection{R.INSTANT.MESSAGE.USERS.006 好友清理}
 \subsubsection{介绍}
-用户可以将自己的好友删除
+用户可以在客户端将自己的好友删除
+\subsubsection{输入}
+\begin{itemize}
+	\item 对方用户ID
+\end{itemize}
 \subsubsection{处理}
-用户可以在主界面的好友列表中右键想要删除的好友，在弹出的菜单中选择删除好友
 客户端会向服务器发送请求，服务器会将对应的记录从数据库上删除
+\subsubsection{输出}
+\begin{itemize}
+	\item 当操作成功时，在用户界面显示成功提示
+	\item 当操作失败时（好友不存在，或网络原因），在用户界面显示出错原因。
+\end{itemize}
+
+\subsection{R.INSTANT.MESSAGE.USERS.007 设置黑名单}
+\subsubsection{介绍}
+用户可以在客户端将其他用户加入黑名单，黑名单中的用户不能再申请好友，发起临时会话
+\subsubsection{输入}
+\begin{itemize}
+	\item 对方用户ID
+\end{itemize}
+\subsubsection{处理}
+客户端会向服务器发送请求，服务器会在数据库上增加黑名单的记录
+\subsubsection{输出}
+\begin{itemize}
+	\item 当操作成功时，在用户界面显示成功提示
+	\item 当操作失败时（用户不存在，或网络原因），在用户界面显示出错原因。
+\end{itemize}
+
+\subsection{R.INSTANT.MESSAGE.USERS.008 隐私设置}
+\subsubsection{介绍}
+用户可以在客户端进行设置，可设置能够通过何种方式添加好友，好友可以查看那些资料，陌生人可以查看那些资料，主页查看权限等
+\subsubsection{输入}
+\begin{itemize}
+	\item 添加好友方式
+	\item 好友权限
+	\item 陌生人权限
+\end{itemize}
+\subsubsection{处理}
+客户端会向服务器发送请求，服务器从表单中读取数据，并在数据库上修改对应的记录
+\subsubsection{输出}
+\begin{itemize}
+	\item 当操作成功时，在用户界面显示成功提示
+	\item 当操作失败时，在用户界面显示出错原因。
+\end{itemize}
 }
 
 
