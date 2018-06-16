@@ -209,7 +209,7 @@
 
 {
 \color{red}
-\subsection{R.INSTANT.MESSAGE.USERS.006 好友清理}
+\subsection{R.INSTANT.MESSAGE.USERS.006 好友删除}
 \subsubsection{介绍}
 用户可以在客户端将自己的好友删除
 \subsubsection{输入}
@@ -217,16 +217,47 @@
 	\item 对方用户ID
 \end{itemize}
 \subsubsection{处理}
-客户端会向服务器发送请求，服务器会将对应的记录从数据库上删除
+客户端向用户再次确认后，会向服务器发送请求，服务器会将对应的记录从数据库上删除。
+\subsubsection{输出}
+\begin{itemize}
+	\item 当操作成功时，在用户界面显示成功提示
+	\item 当操作失败时（好友不存在，或网络原因），在用户界面显示出错原因。
+\end{itemize}
+\subsection{R.INSTANT.MESSAGE.USERS.007 好友推荐}
+\subsubsection{介绍}
+由服务端依据多个维度的数据定期推送可能认识的人至用户客户端。可从以下的多个维度查找合适的候选用户用于推送：
+\begin{itemize}
+	\item 与该用户处于相同城市的用户
+	\item 与该用户有着类似的用户资料字段（如年龄、兴趣爱好）
+	\item 与该用户同时处于多个聊天群组
+	\item 与该用户同时与多个另外的用户是好友关系（即二度人脉）
+\end{itemize}
+\subsubsection{输入}
+由服务端自动推送，无需用户输入。
+\subsubsection{处理}
+当服务器计算出可能认识的用户时，向客户端发送推送消息。客户端发出通知，并生成一个用户列表，每一个条目均包含一个申请好友的入口。
+\subsubsection{输出}
+\begin{itemize}
+	\item 当服务器计算出可能认识的用户时，客户端显示推送消息，以及申请好友的入口。
+	\item 当服务器未筛选出符合条件的用户时，客户度静默失败，不显示任何推送。
+\end{itemize}
+
+\subsection{R.INSTANT.MESSAGE.USERS.007 好友清理}
+\subsubsection{介绍}
+客户端可依据各种不同的筛选条件，如最近的聊天时间、聊天频率等，筛选出部分不常联系的好友。用户可在筛选出的列表中实施部分或批量删除。
+\subsubsection{输入}
+由系统生成，无需用户输入。
+\subsubsection{处理}
+客户端会向服务器发送请求，服务器会将对应的多条记录从数据库上删除
 \subsubsection{输出}
 \begin{itemize}
 	\item 当操作成功时，在用户界面显示成功提示
 	\item 当操作失败时（好友不存在，或网络原因），在用户界面显示出错原因。
 \end{itemize}
 
-\subsection{R.INSTANT.MESSAGE.USERS.007 设置黑名单}
+\subsection{R.INSTANT.MESSAGE.USERS.008 设置黑名单}
 \subsubsection{介绍}
-用户可以在客户端将其他用户加入黑名单，黑名单中的用户不能再申请好友，发起临时会话
+用户可以在客户端将其他用户加入黑名单，黑名单中的用户不能再向自己申请好友，发起临时会话。
 \subsubsection{输入}
 \begin{itemize}
 	\item 对方用户ID
@@ -239,7 +270,7 @@
 	\item 当操作失败时（用户不存在，或网络原因），在用户界面显示出错原因。
 \end{itemize}
 
-\subsection{R.INSTANT.MESSAGE.USERS.008 隐私设置}
+\subsection{R.INSTANT.MESSAGE.USERS.009 隐私设置}
 \subsubsection{介绍}
 用户可以在客户端进行设置，可设置能够通过何种方式添加好友，好友可以查看那些资料，陌生人可以查看那些资料，主页查看权限等
 \subsubsection{输入}
@@ -252,7 +283,7 @@
 客户端会向服务器发送请求，服务器从表单中读取数据，并在数据库上修改对应的记录
 \subsubsection{输出}
 \begin{itemize}
-	\item 当操作成功时，在用户界面显示成功提示
+	\item 当操作成功时，在用户界面显示成功提示。
 	\item 当操作失败时，在用户界面显示出错原因。
 \end{itemize}
 }
