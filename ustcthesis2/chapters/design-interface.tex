@@ -212,3 +212,49 @@
     \item 403: 未登录。
     \item 404: 未找到符合条件的消息。
     \end{itemize}
+
+{\color{red}
+\section{内部接口}
+%内部模块/系统之间的交互的接口。
+\subsection{客户端}
+\begin{itemize}
+    \item 登录
+    \begin{lstlisting}[language=c++]
+    Status Login(
+        string username,  // 用户名
+        string password, // 密码
+        string captcha, // 验证码
+    )
+    \end{lstlisting}
+
+    \item 发送文本消息
+    \begin{lstlisting}[language=c++]
+    void sendText(
+        string content,  // 文本内容
+    )
+    \end{lstlisting}
+
+    \item 获取好友列表
+    \begin{lstlisting}[language=c++]
+    List<User> getFriendList()
+    \end{lstlisting}
+
+    \item 申请好友
+    \begin{lstlisting}[language=c++]
+    void addFriend(
+        int user_id, //用户id
+        string content, // 验证消息
+    )
+    \end{lstlisting}
+\end{itemize}
+\subsection{服务端}
+\begin{itemize}
+    \item 转发消息
+    \begin{lstlisting}[language=c++]
+    void transmit(
+        int user_id, //用户id
+        string content, // 消息内容
+    )
+    \end{lstlisting}
+\end{itemize}
+}
