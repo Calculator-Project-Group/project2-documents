@@ -90,20 +90,20 @@
 \subsection{整体结构}
 %此处应当有一个图和对应的描述。系统如果像微内核那样，划分成核心模块和若干个子系统，此处应当有图示及说明，然后后续几个节应当描述这几个子系统。如果系统像宏内核，那应当说明有哪些紧密联系的模块，并在后续几个节内描述这些模块。
 产品的整体结构如图-\ref{fig:overall_architecture}所示。
-\begin{figure}[h]
+\begin{figure}[]
 	\centering
 	\includegraphics[width=13cm]{overall_architecture}
 	\caption{整体结构} \label{fig:overall_architecture}
 \end{figure}
 
-\subsection{用户端结构}
+%\subsection{用户端结构}
 % 此处应当有一个图和对应的描述。这只是举个例子。可能的内容包括用户端的具体模块、耦合情况等。
 % 用户端结构如图-\ref{fig:}
 
 \subsection{服务器端结构}
 % 此处应当有一个图和对应的描述。这只是举个例子。
 服务器端各模块的结构图如图-\ref{fig:backend_architecture}所示。
-\begin{figure}[h]
+\begin{figure}[]
 	\centering
 	\includegraphics[width=13cm]{backend_arch}
 	\caption{服务器端结构} \label{fig:backend_architecture}
@@ -129,7 +129,35 @@ Django Web应用内部，还大致分为Request Dispatcher和Views两大模块�
 % \subsection{后台数据库维护模块结构}
 % 此处应当有一个图和对应的描述。这只是举个例子。
 
+{\color{red}
+\section{一致性和时序性设计}
+单人聊天，发送方A依次发出了msg1，msg2，msg3三个消息给接收方 B，需保证在接收方B显示时序的一致性（发送与显示的顺序一致）。
 
+在 A 往 B 发出的消息中，加上发送方 A 本地的一个绝对时序seq（一个计数器）。工作流程：
+\begin{enumerate}
+	\item A 发出 msg1，msg2，msg3
+	\item 因为网络状况的问题，msg3 先到达服务器
+	\item server 根据 seq 知前面还有两条消息，阻塞等待
+	\item msg1， msg2 到达
+	\item 通过推送服务将消息按顺序发给 B
+\end{enumerate}
+
+排序工作也可由接收方客户端完成，服务器只要收到消息就转发。
+客户端负责维护接收队列并排序，将消息按顺序显示给用户。
+减轻服务器压力，同时避免服务器推送消息到客户端时出现的时序性问题。
+
+多人群聊，需要保证每个用户看到的消息顺序都是一致的（所有接收方展现顺序一致）。
+
+采用服务器单点序列化的技术。在服务器端维护消息的计数器。工作流程：
+\begin{enumerate}
+	\item A 发出msg1，B 发出msg2
+	\item msg1 和 msg2 分别到达服务器
+	\item server维护一个唯一的seq，来确定接收方展示时序
+	\item server分配给msg1的seq是20，msg2的seq是21
+	\item 通过推送服务将消息发给多个群友，群友即使接收到msg1和msg2的时间不同，但可以统一按照seq来展现。
+\end{enumerate}
+存在问题：无法保证同一个用户的消息按发送顺序来展示
+}
 
 \section{功能需求与程序代码的关系}
 % [此处指的是不同的需求分配到哪些模块去实现。可按不同的端拆分此表]
