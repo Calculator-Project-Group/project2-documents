@@ -39,6 +39,7 @@
 
 
 \section{外部接口}
+\label{sec:extif}
 服务器对外公开的HTTP API遵循RESTful API设计规范。即，对于相同URL的请求，不同的请求方法（如POST, GET, PUT, DELETE等），往往对应着较为统一、类似的语义。
 
 具体而言，标 API<T> <base> 的为类型 T 的 CRUD API， 操作有如下几类：（每个操作均对应到一个HTTP请求方法）
@@ -99,12 +100,16 @@
 用户登录。
 
 \textbf{输入：}
-\begin{lstlisting}[language=C]
-    {
-        username*: String,
-        password*: String
-    }
-\end{lstlisting}
+{\color{red}
+    \begin{lstlisting}[language=C]
+        {
+            username*: String,
+            // 考虑到安全性，传输时应使用密码的Hash值，而不是密码本身！
+            password_hash*: String 
+        }
+    \end{lstlisting}
+}
+
 
 \textbf{返回结果：}
 \begin{itemize}
@@ -230,7 +235,8 @@
     \end{lstlisting}
 
     \item 聊天室类
-    聊天室类，对应一个聊天窗口，有子类，好友单聊聊天室，多人群组聊天室
+
+    聊天室类，对应一个聊天窗口，包括子类：好友单聊聊天室，多人群组聊天室
     \begin{lstlisting}[language=c++]
     class Room:
     {
@@ -342,13 +348,111 @@
 \end{itemize}
 
 \subsection{服务端}
-服务端的接口主要为视图函数，由来自客户端的请求回调
+服务端的接口主要为视图函数，即在服务端Web应用内处理HTTP请求、并生成HTTP应答的函数。它由来自客户端的请求回调。
+
+视图函数的返回值，即各种类型的HTTP应答，与\textbf{\ref{sec:extif}节}中的返回结果保持一致。
 \begin{itemize}
     \item 转发消息
     \begin{lstlisting}[language=c++]
-    void transmit(
+    HttpResponse transmit(
+        HttpRequest req,
         int user_id, //用户id
-        string content, // 消息内容
+        string content // 消息内容
+    )
+    \end{lstlisting}
+
+    \item 搜索符合条件的用户
+    \begin{lstlisting}[language=c++]
+    HttpResponse searchUser(
+        HttpRequest req,
+        String username
+    )
+    \end{lstlisting}
+
+    \item 创建新用户
+    \begin{lstlisting}[language=c++]
+    HttpResponse createUser(
+        HttpRequest req,
+        User user
+    )
+    \end{lstlisting}
+
+    \item 更新用户信息
+    \begin{lstlisting}[language=c++]
+    HttpResponse editUser(
+        HttpRequest req,
+        User user
+    )
+    \end{lstlisting}
+
+    \item 用户登录
+    \begin{lstlisting}[language=c++]
+    HttpResponse login(
+        HttpRequest req,
+        String username,
+        String password_hash
+    )
+    \end{lstlisting}
+
+    \item 用户登出
+    \begin{lstlisting}[language=c++]
+    HttpResponse logout(HttpRequest req)
+    \end{lstlisting}
+
+    \item 获取好友列表
+    \begin{lstlisting}[language=c++]
+    HttpResponse getUserList(HttpRequest req) 
+    // req对象内包含了登录状态信息以及用户ID
+    \end{lstlisting}
+
+    \item 请求添加用户名为username的用户为好友
+    \begin{lstlisting}[language=c++]
+    HttpResponse applyFriend(
+        HttpRequest req,
+        String username
+    )
+    \end{lstlisting}
+
+    \item 删除用户名为username的好友
+    \begin{lstlisting}[language=c++]
+    HttpResponse deleteFriend(
+        HttpRequest req,
+        String username
+    )
+    \end{lstlisting}
+
+    \item 获取所有与好友的消息列表
+    \begin{lstlisting}[language=c++]
+    HttpResponse getMsgList(
+        HttpRequest req,
+        String username,
+        DateTime anchor
+    )
+    \end{lstlisting}
+
+    \item 发送一条消息
+    \begin{lstlisting}[language=c++]
+    HttpResponse sendMsg(
+        HttpRequest req,
+        String send_to,
+        MSG_TYPE msg_type,
+        String text, ...
+    ) // 其他多媒体类型消息，可以重载此方法
+    \end{lstlisting}
+
+    \item 获取消息ID为message\_id的一条消息
+    \begin{lstlisting}[language=c++]
+    HttpResponse getMsg(
+        HttpRequest req,
+        int msg_id
+    )
+    \end{lstlisting}
+
+    \item 将指定消息设为已读（在用户在客户端查看这条消息时触发）
+    \begin{lstlisting}[language=c++]
+    HttpResponse setRead(
+        HttpRequest req,
+        int msg_id
     )
     \end{lstlisting}
 
