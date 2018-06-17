@@ -217,26 +217,66 @@
 \section{内部接口}
 %内部模块/系统之间的交互的接口。
 \subsection{客户端}
+%客户端需要和用户进行交互，采用事件循环(eventloop)模型设计
 \begin{itemize}
     \item 登录
+    调用该接口登录服务器
     \begin{lstlisting}[language=c++]
-    Status Login(
+    void Login(
         string username,  // 用户名
         string password, // 密码
         string captcha, // 验证码
     )
     \end{lstlisting}
 
-    \item 发送文本消息
+    \item 会话类
+    会话类，对应一个聊天窗口，有子类，好友单聊聊天室，多人群组聊天室
     \begin{lstlisting}[language=c++]
-    void sendText(
-        string content,  // 文本内容
-    )
+    class Room:
+    {
+        // 发送文本消息
+        void sendText(
+            string content,  // 文本内容
+        )
+
+        // 发送语音消息
+        void sendAudio(
+            Audio a,  // 语音内容
+        )
+
+        // 发送文件
+        void sendFile(
+            string path,  // 文件路径
+        )
+
+        // 从服务器拉取聊天记录
+        void getRecord(
+            int starttime, // 开始时间戳
+            int endtime, // 结束时间戳
+        )
+    }
+
+    class FriendRoom: Room
+    {
+        FriendRoom(User u) // 传入一个用户对象初始化
+    }
+
+    class GroupRoom: Room
+    {
+        GroupRoom(Group g) // 传入一个群组对象初始化
+
+    }
+
     \end{lstlisting}
 
     \item 获取好友列表
     \begin{lstlisting}[language=c++]
     List<User> getFriendList()
+    \end{lstlisting}
+
+    \item 获取群组列表
+    \begin{lstlisting}[language=c++]
+    List<Group> getGroupList()
     \end{lstlisting}
 
     \item 申请好友
@@ -247,7 +287,9 @@
     )
     \end{lstlisting}
 \end{itemize}
+
 \subsection{服务端}
+服务端的接口主要为视图函数，由来自客户端的请求回调
 \begin{itemize}
     \item 转发消息
     \begin{lstlisting}[language=c++]
@@ -256,5 +298,6 @@
         string content, // 消息内容
     )
     \end{lstlisting}
+
 \end{itemize}
 }
